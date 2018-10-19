@@ -9,7 +9,7 @@ namespace WpfApp1
 {
     class Reader
     {
-        private void GetData()
+        public void GetData()
         {
             using (StreamReader sr = new StreamReader(@"...\...\Files\Stundezettel.txt"))
             {
@@ -21,10 +21,11 @@ namespace WpfApp1
 
                     strArray = str.Split('/');
 
-                    DateTime Date = DateTime.ParseExact(strArray[0], "ddMMyyyy", System.Globalization.CultureInfo.InvariantCulture).Date;
-                    Console.WriteLine(Date);
-                    string Start = strArray[1];
+                    //DateTime Date = DateTime.ParseExact(strArray[0], "ddMMyyyy", System.Globalization.CultureInfo.InvariantCulture).Date;
+                    //Console.WriteLine(Date);
+                    DateTime Start = DateTime.Parse(strArray[1]);
                     Console.WriteLine(Start);
+                
                     //DayData tempDay = new DayData()
                     //{
                     //    Date = DateTime.ParseExact(strArray[0], "ddMMyyyy", System.Globalization.CultureInfo.InvariantCulture),
