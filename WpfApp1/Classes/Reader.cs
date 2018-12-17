@@ -32,8 +32,7 @@ namespace WpfApp1
                         strList.Add(count, tempRow);
                     }
 
-                    //DayData tempDay = new DayData(Date, Start, End, Hours, breakTime, reason);
-                    //Utility.days_l.Add(tempDay);
+
                 }
                 ReadDictionary(strList);
             }
@@ -47,8 +46,8 @@ namespace WpfApp1
                 DayData tempDay = new DayData();
 
                 tempDay.Date = DateTime.ParseExact(row.Value[0], "ddMMyyyy", System.Globalization.CultureInfo.InvariantCulture).Date;
-                tempDay.Start = DateTime.ParseExact(row.Value[1], "HHmm", System.Globalization.CultureInfo.InvariantCulture);
-                tempDay.End = DateTime.ParseExact(row.Value[2], "HHmm", System.Globalization.CultureInfo.InvariantCulture);
+                tempDay.Start = TimeSpan.Parse(row.Value[1]);
+                tempDay.End = TimeSpan.Parse(row.Value[2]);
                 tempDay.Hours = GetHours(tempDay.Start, tempDay.End);
                 if (row.Value.Count >= 4)
                 {
@@ -68,13 +67,14 @@ namespace WpfApp1
                         else
                             tempDay.Reason = row.Value[4];
                     }
+                    Utility.days_l.Add(tempDay);
                 }
             }
         }
 
-        TimeSpan GetHours(DateTime sta, DateTime end)
+        TimeSpan GetHours(TimeSpan sta, TimeSpan end)
         {
-            TimeSpan diff = sta - end;
+            TimeSpan diff = end - sta;
             return diff;
         }
     }
