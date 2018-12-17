@@ -13,7 +13,7 @@ namespace WpfApp1
         public TimeSpan Start { get; set; }
         public TimeSpan End { get; set; }
         public TimeSpan Hours { get; set; }
-        public float BreakTime { get; set; }
+        public double BreakTime { get; set; }
         public string Reason { get; set; }
 
         public DayData(DateTime date, TimeSpan start, TimeSpan end, TimeSpan hours, float breakTime, string reason)

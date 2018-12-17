@@ -48,15 +48,18 @@ namespace WpfApp1
                 tempDay.Date = DateTime.ParseExact(row.Value[0], "ddMMyyyy", System.Globalization.CultureInfo.InvariantCulture).Date;
                 tempDay.Start = TimeSpan.Parse(row.Value[1]);
                 tempDay.End = TimeSpan.Parse(row.Value[2]);
-                tempDay.Hours = GetHours(tempDay.Start, tempDay.End);
                 if (row.Value.Count >= 4)
                 {
                     if (String.IsNullOrEmpty(row.Value[3]))
                     {
                         tempDay.BreakTime = 30;
+                        tempDay.Hours = GetHours(tempDay.Start, tempDay.End, tempDay.BreakTime);
                     }
                     else
-                        tempDay.BreakTime = float.Parse(row.Value[3]);
+                    {
+                        tempDay.BreakTime = double.Parse(row.Value[3]);
+                        tempDay.Hours = GetHours(tempDay.Start, tempDay.End, tempDay.BreakTime);
+                    }
 
                     if (row.Value.Count >= 5)
                     {
@@ -72,9 +75,10 @@ namespace WpfApp1
             }
         }
 
-        TimeSpan GetHours(TimeSpan sta, TimeSpan end)
+        TimeSpan GetHours(TimeSpan sta, TimeSpan end, double bT)
         {
-            TimeSpan diff = end - sta;
+            TimeSpan diff = (end - sta);
+            diff.Subtract(TimeSpan.FromMinutes(bT));
             return diff;
         }
     }
