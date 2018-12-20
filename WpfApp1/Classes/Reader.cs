@@ -32,8 +32,7 @@ namespace WpfApp1
                         strList.Add(count, tempRow);
                     }
 
-                    //DayData tempDay = new DayData(Date, Start, End, Hours, breakTime, reason);
-                    //Utility.days_l.Add(tempDay);
+
                 }
                 ReadDictionary(strList);
             }
@@ -47,17 +46,20 @@ namespace WpfApp1
                 DayData tempDay = new DayData();
 
                 tempDay.Date = DateTime.ParseExact(row.Value[0], "ddMMyyyy", System.Globalization.CultureInfo.InvariantCulture).Date;
-                tempDay.Start = DateTime.ParseExact(row.Value[1], "HHmm", System.Globalization.CultureInfo.InvariantCulture);
-                tempDay.End = DateTime.ParseExact(row.Value[2], "HHmm", System.Globalization.CultureInfo.InvariantCulture);
-                tempDay.Hours = GetHours(tempDay.Start, tempDay.End);
+                tempDay.Start = TimeSpan.Parse(row.Value[1]);
+                tempDay.End = TimeSpan.Parse(row.Value[2]);
                 if (row.Value.Count >= 4)
                 {
                     if (String.IsNullOrEmpty(row.Value[3]))
                     {
                         tempDay.BreakTime = 30;
+                        tempDay.Hours = GetHours(tempDay.Start, tempDay.End, tempDay.BreakTime);
                     }
                     else
-                        tempDay.BreakTime = float.Parse(row.Value[3]);
+                    {
+                        tempDay.BreakTime = double.Parse(row.Value[3]);
+                        tempDay.Hours = GetHours(tempDay.Start, tempDay.End, tempDay.BreakTime);
+                    }
 
                     if (row.Value.Count >= 5)
                     {
@@ -68,13 +70,15 @@ namespace WpfApp1
                         else
                             tempDay.Reason = row.Value[4];
                     }
+                    Utility.days_l.Add(tempDay);
                 }
             }
         }
 
-        TimeSpan GetHours(DateTime sta, DateTime end)
+        TimeSpan GetHours(TimeSpan sta, TimeSpan end, double bT)
         {
-            TimeSpan diff = sta - end;
+            TimeSpan diff = (end - sta);
+            diff.Subtract(TimeSpan.FromMinutes(bT));
             return diff;
         }
     }
