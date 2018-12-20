@@ -361,6 +361,7 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+*.ide
 
 
 # End of https://www.gitignore.io/api/windows,visualstudio
