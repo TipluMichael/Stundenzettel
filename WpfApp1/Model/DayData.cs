@@ -15,8 +15,15 @@ namespace WpfApp1.Model
         public TimeSpan Hours { get; set; }
         public double BreakTime { get; set; }
         public string Reason { get; set; }
+        public TimeSpan Overtime { get; set; }
 
-        public DayData(DateTime date, TimeSpan start, TimeSpan end, TimeSpan hours, float breakTime, string reason)
+
+        public DayData()
+        {
+
+        }
+
+        public DayData(DateTime date, TimeSpan start, TimeSpan end, TimeSpan hours, TimeSpan overtime, double breakTime = 30, string reason = "-")
         {
             Date = date;
             Start = start;
@@ -24,12 +31,7 @@ namespace WpfApp1.Model
             Hours = hours;
             BreakTime = breakTime;
             Reason = reason;
+            Overtime = overtime;
         }
-
-        public DayData()
-        {
-
-        }
-
     }
 }

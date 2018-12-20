@@ -35,7 +35,7 @@ namespace WpfApp1.Model
 
 
                 }
-                ReadDictionary(strList,vDayDataList);
+                ReadDictionary(strList, vDayDataList);
             }
 
         }
@@ -78,8 +78,7 @@ namespace WpfApp1.Model
 
         TimeSpan GetHours(TimeSpan sta, TimeSpan end, double bT)
         {
-            TimeSpan diff = (end - sta);
-            diff.Subtract(TimeSpan.FromMinutes(bT));
+            TimeSpan diff = (end - sta) - TimeSpan.FromMinutes(bT);
             return diff;
         }
     }

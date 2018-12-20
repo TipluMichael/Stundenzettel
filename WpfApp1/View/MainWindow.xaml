@@ -20,12 +20,21 @@
 
     <DockPanel>
         <ToolBar DockPanel.Dock="Top" HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="792" Grid.ColumnSpan="2" AutomationProperties.IsRowHeader="True"/>
+
+        <DockPanel DockPanel.Dock="Bottom" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <Label Name="FilePath" Content="Dateipfad" HorizontalAlignment="Left" />
+            <TextBox Width="150" Height="20" Text ="{Binding Path=FilePath}"></TextBox>
+            <Button Name="FolderBrowser" Width="20" Height="20" Margin="2,0,0,0"  Command="{Binding Path= OnFolderDialogClick}"></Button>
+            <Label Name="Overtime" Content="{Binding Path=OverallOvertime, StringFormat={}{0:hh}:{0:mm}}" HorizontalAlignment="Right"></Label>
+        </DockPanel>
+
         <DataGrid Grid.ColumnSpan="2"
                           AutoGenerateColumns="False"
                           CanUserResizeRows="True"
                           ItemsSource="{Binding Path=Daydatasource.View}"
                           CanUserAddRows="False"
                           IsSynchronizedWithCurrentItem="True"
+                            DockPanel.Dock="Top"
                           >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Date"
@@ -48,6 +57,11 @@
                                             Binding="{Binding Path=Hours, StringFormat={}{0:hh}:{0:mm}}"
                                             IsReadOnly="True"
                                             CanUserSort="True" />
+                <DataGridTextColumn Header="Overtime"
+                                            Width="*"
+                                            Binding="{Binding Path=Overtime, StringFormat={}{0:hh}:{0:mm}}"
+                                            IsReadOnly="True"
+                                            CanUserSort="True" />
                 <DataGridTextColumn Header="Breaktime"
                                             Width="*"
                                             Binding="{Binding Path=BreakTime}"
@@ -60,5 +74,6 @@
                                             CanUserSort="True" />
             </DataGrid.Columns>
         </DataGrid>
+
     </DockPanel>
 </Window>
