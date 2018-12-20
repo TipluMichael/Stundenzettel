@@ -1,0 +1,64 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        xmlns:model="clr-namespace:WpfApp1.ViewModel"
+        xmlns:load="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        mc:Ignorable="d"
+        Title="Stundenzettel" Height="450" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <model:MainWindowViewModel />
+    </Window.DataContext>
+
+    <load:Interaction.Triggers>
+        <load:EventTrigger EventName="Loaded">
+            <load:InvokeCommandAction Command= "{Binding OnLoad}" />
+        </load:EventTrigger>
+    </load:Interaction.Triggers>
+
+    <DockPanel>
+        <ToolBar DockPanel.Dock="Top" HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="792" Grid.ColumnSpan="2" AutomationProperties.IsRowHeader="True"/>
+        <DataGrid Grid.ColumnSpan="2"
+                          AutoGenerateColumns="False"
+                          CanUserResizeRows="True"
+                          ItemsSource="{Binding Path=Daydatasource.View}"
+                          CanUserAddRows="False"
+                          IsSynchronizedWithCurrentItem="True"
+                          >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Date"
+                                            Width="*"
+                                            Binding="{Binding Path=Date, StringFormat={}{0:dd/MM/yyyy}}"
+                                            IsReadOnly="True"
+                                            CanUserSort="True" />
+                <DataGridTextColumn Header="Start"
+                                            Width="*"
+                                            Binding="{Binding Path=Start, StringFormat={}{0:hh}:{0:mm}}"
+                                            IsReadOnly="True"
+                                            CanUserSort="True" />
+                <DataGridTextColumn Header="End"
+                                            Width="*"
+                                            Binding="{Binding Path=End, StringFormat={}{0:hh}:{0:mm}}"
+                                            IsReadOnly="True"
+                                            CanUserSort="True" />
+                <DataGridTextColumn Header="Hours"
+                                            Width="*"
+                                            Binding="{Binding Path=Hours, StringFormat={}{0:hh}:{0:mm}}"
+                                            IsReadOnly="True"
+                                            CanUserSort="True" />
+                <DataGridTextColumn Header="Breaktime"
+                                            Width="*"
+                                            Binding="{Binding Path=BreakTime}"
+                                            IsReadOnly="True"
+                                            CanUserSort="True" />
+                <DataGridTextColumn Header="Reasons"
+                                            Width="*"
+                                            Binding="{Binding Path=Reason}"
+                                            IsReadOnly="True"
+                                            CanUserSort="True" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</Window>

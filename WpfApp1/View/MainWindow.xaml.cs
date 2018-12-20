@@ -24,20 +24,6 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
-            Run();
-
-        }
-
-        private void Run()
-        {
-            Reader rdr = new Reader();
-            rdr.GetData();
-        }
-
-        private void GlobalGrid_Loaded(object sender, RoutedEventArgs e)
-        {
-            var grid = sender as DataGrid;
-            grid.ItemsSource = Utility.days_l;
         }
     }
 }

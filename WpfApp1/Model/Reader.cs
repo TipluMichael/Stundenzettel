@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfApp1
+namespace WpfApp1.Model
 {
     class Reader
     {
-        public void GetData()
+        public void GetData(ObservableCollection<DayData> vDayDataList)
         {
             int count = 0;
             Dictionary<int, List<string>> strList = new Dictionary<int, List<string>>();
@@ -34,12 +35,12 @@ namespace WpfApp1
 
 
                 }
-                ReadDictionary(strList);
+                ReadDictionary(strList,vDayDataList);
             }
 
         }
 
-        private void ReadDictionary(Dictionary<int, List<string>> strList)
+        private void ReadDictionary(Dictionary<int, List<string>> strList, ObservableCollection<DayData> vDayDataList)
         {
             foreach (var row in strList)
             {
@@ -70,7 +71,7 @@ namespace WpfApp1
                         else
                             tempDay.Reason = row.Value[4];
                     }
-                    Utility.days_l.Add(tempDay);
+                    vDayDataList.Add(tempDay);
                 }
             }
         }
