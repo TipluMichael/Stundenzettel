@@ -16,10 +16,19 @@ namespace WpfApp1.Model
                 if (tday.Hours.TotalMinutes > 480)
                 {
                     tday.Overtime =  tday.Hours - (TimeSpan.FromMinutes(480));
+                    if (tday.Overtime.TotalMinutes >= 30)
+                    {
+                        tday.Overtime = tday.Hours - (TimeSpan.FromMinutes(480));
+                    }
+                    else
+                    {
+                        tday.Overtime = new TimeSpan(0, 0, 0);
+                    }
                 }
                 else
                 {
-                    tday.Overtime = new TimeSpan(0,0,0);
+                    tday.Overtime = tday.Hours - (TimeSpan.FromMinutes(480));
+                    tday.Overtime.Duration();
                 }
             }
         }

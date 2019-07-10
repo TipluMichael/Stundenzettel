@@ -67,7 +67,7 @@ namespace WpfApp1.ViewModel
         {
             Management mgmt = new Management();
             mgmt.Run(Daydata);
-            OverallOvertime = $"Überstunden gesamt: { mgmt.tHandler.OverallOvertime(Daydata)}";
+            OverallOvertime = $"Überstunden gesamt: { mgmt.tHandler.OverallOvertime(Daydata).TotalHours.ToString("##,##")}";
         }
 
         private void FolderDialogClick()

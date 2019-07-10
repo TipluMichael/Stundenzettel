@@ -47,32 +47,46 @@ namespace WpfApp1.Model
                 DayData tempDay = new DayData();
 
                 tempDay.Date = DateTime.ParseExact(row.Value[0], "ddMMyyyy", System.Globalization.CultureInfo.InvariantCulture).Date;
-                tempDay.Start = TimeSpan.Parse(row.Value[1]);
-                tempDay.End = TimeSpan.Parse(row.Value[2]);
-                if (row.Value.Count >= 4)
+                int lenght = row.Value.Count;
+                switch (lenght)
                 {
-                    if (String.IsNullOrEmpty(row.Value[3]))
-                    {
+                    //TODO: Mach ma
+                    case 2:
+                        tempDay.Start = TimeSpan.Parse(row.Value[1]);
+                        tempDay.End = TimeSpan.Parse(row.Value[1]);
+                        break;
+                    case 3:
                         tempDay.BreakTime = 30;
+                        tempDay.Start = TimeSpan.Parse(row.Value[1]);
+                        tempDay.End = TimeSpan.Parse(row.Value[2]);
                         tempDay.Hours = GetHours(tempDay.Start, tempDay.End, tempDay.BreakTime);
-                    }
-                    else
-                    {
-                        tempDay.BreakTime = double.Parse(row.Value[3]);
-                        tempDay.Hours = GetHours(tempDay.Start, tempDay.End, tempDay.BreakTime);
-                    }
-
-                    if (row.Value.Count >= 5)
-                    {
-                        if (String.IsNullOrEmpty(row.Value[4]))
+                        break;
+                    case 4:
+                        if (String.IsNullOrEmpty(row.Value[3]))
                         {
-                            tempDay.Reason = "-";
+                            tempDay.BreakTime = 30;
                         }
                         else
-                            tempDay.Reason = row.Value[4];
-                    }
-                    vDayDataList.Add(tempDay);
+                        {
+                            tempDay.Hours = GetHours(tempDay.Start, tempDay.End, tempDay.BreakTime);
+                        }
+                        tempDay.Start = TimeSpan.Parse(row.Value[1]);
+                        tempDay.End = TimeSpan.Parse(row.Value[2]);
+
+                        tempDay.Hours = GetHours(tempDay.Start, tempDay.End, tempDay.BreakTime);
+                        tempDay.Reason = "-";
+                        break;
+                    case 5:
+                        tempDay.Start = TimeSpan.Parse(row.Value[1]);
+                        tempDay.End = TimeSpan.Parse(row.Value[2]);
+                        tempDay.Hours = GetHours(tempDay.Start, tempDay.End, tempDay.BreakTime);
+                        tempDay.BreakTime = double.Parse(row.Value[3]);
+                        tempDay.Reason = row.Value[4];
+                        break;
+                    default:
+                        break;
                 }
+                vDayDataList.Add(tempDay);
             }
         }
 

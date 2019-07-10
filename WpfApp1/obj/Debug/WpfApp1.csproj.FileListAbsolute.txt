@@ -83,3 +83,4 @@ C:\Users\Tiplu\Documents\Projekte\Stundenzettel\WpfApp1\obj\Debug\View\MainWindo
 C:\Users\Tiplu\Documents\Projekte\Stundenzettel\WpfApp1\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\Tiplu\Documents\Projekte\Stundenzettel\WpfApp1\obj\Debug\View\MainWindow.baml
 C:\Users\Tiplu\Documents\Projekte\Stundenzettel\WpfApp1\obj\Debug\WpfApp1.csproj.CopyComplete
+C:\Users\Tiplu\Documents\Projekte\Stundenzettel\WpfApp1\obj\Debug\WpfApp1.csprojAssemblyReference.cache
